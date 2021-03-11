@@ -67,7 +67,8 @@ var time_to_sec = function (time) {
             if (now / all >= 0.9) {
                 console.log('本节完成，' + delay / 1000 + ' 秒后将切到下一课')
                 await sleep(delay)
-                $('.current_play').nextAll('.video')[0].click()
+                $("#nextBtn")[0].click()
+                await sleep(1000)
                 flag = true
             }
 
