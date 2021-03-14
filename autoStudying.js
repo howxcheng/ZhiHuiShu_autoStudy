@@ -1,18 +1,19 @@
 var time_to_sec = function (time) {
-    var s = '';
+    var s = time.split(':');
 
-    var hour = time.split(':')[0];
-    var min = time.split(':')[1];
-    var sec = time.split(':')[2];
+    var hour = s[0];
+    var min = s[1];
+    var sec = s[2];
 
-    s = Number(hour * 3600) + Number(min * 60) + Number(sec);
+    second = '';
+    second = Number(hour * 3600) + Number(min * 60) + Number(sec);
 
-    return s;
+    return second;
 };
 
 (function () {
-    const STUDY_TIME = 30 * 60 * 1000
-    // 学习时间，默认30分钟
+    const STUDY_TIME = 25 * 60 * 1000
+    // 学习时间，默认25分钟
     const MAX_DELAY = 5 // 切课时的最大延迟，单位：秒
 
     const sleep = (time) => new Promise((resolve) => setTimeout(resolve, time))
@@ -23,7 +24,7 @@ var time_to_sec = function (time) {
         var studyTime = STUDY_TIME
         while (studyTime > 0) {
             minter = Math.floor(studyTime / 1000 / 60)
-            second = studyTime / 1000 % 60
+            second = Math.floor(studyTime / 1000) % 60
             console.log("正在检查...(剩余学习时间：" + minter + '分' + second + '秒)')
             const delay = Math.floor(Math.random() * MAX_DELAY * 1000) + 1000
 
@@ -75,6 +76,8 @@ var time_to_sec = function (time) {
             await sleep(1000)
             studyTime -= 1000
         }
+        $("#playButton")[0].click()
+        window.alert("自动学习已结束")
     }
 
     start()
